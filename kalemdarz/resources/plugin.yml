@@ -1,0 +1,8 @@
+name: AdventCalendarPlugin
+main: com.example.adventcalendar.AdventCalendarPlugin
+version: 1.0
+api-version: 1.20
+commands:
+  kalendarz:
+    description: Otwórz kalendarz adwentowy lub przypisz go graczowi.
+    usage: /kalendarz [gracz] [darmowy|premium]
