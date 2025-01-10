@@ -1,0 +1,32 @@
+name: Build and Deploy Minecraft Plugin
+
+on:
+  push:
+    branches:
+      - main  # Workflow uruchamia się na push do gałęzi main
+  pull_request:
+    branches:
+      - main  # Workflow uruchamia się na pull request do gałęzi main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Uruchamia job na systemie Ubuntu
+
+    steps:
+    - name: Check out code  # Pierwszy krok: Pobranie kodu z repozytorium
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17  # Ustawienie środowiska JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'adoptopenjdk'
+
+    - name: Build with Maven  # Budowanie projektu za pomocą Maven
+      run: mvn clean package  # Komenda, która buduje projekt
+
+    - name: Upload JAR file  # Wysyłanie pliku JAR jako artefakt
+      uses: actions/upload-artifact@v2
+      with:
+        name: adventcalendar-plugin  # Nazwa artefaktu
+        path: target/*.jar  # Ścieżka do pliku JAR po zbudowaniu
